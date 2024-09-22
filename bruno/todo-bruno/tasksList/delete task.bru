@@ -1,17 +1,17 @@
 meta {
-  name: get one
+  name: delete task
   type: http
-  seq: 2
+  seq: 5
 }
 
-get {
-  url: {{baseUrl}}/todos/:id
+delete {
+  url: {{baseUrl}}/tasks/:task_id
   body: none
   auth: bearer
 }
 
 params:path {
-  id: 5
+  task_id: 1
 }
 
 auth:bearer {

@@ -11,7 +11,7 @@
 
 ```bash
     #migrate
-    flask db init
-    flask db migrate -m "Initial migration."
-    flask db upgrade
+    python -m flask db init
+    python -m flask db migrate -m "Initial migration."
+    python -m flask db upgrade
 ```

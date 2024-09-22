@@ -1,19 +1,25 @@
 meta {
-  name: get one
+  name: put one
   type: http
-  seq: 2
+  seq: 3
 }
 
-get {
+put {
   url: {{baseUrl}}/todos/:id
-  body: none
+  body: json
   auth: bearer
 }
 
 params:path {
-  id: 5
+  id: 1
 }
 
 auth:bearer {
   token: {{authToken}}
+}
+
+body:json {
+  {
+    "name": "Updated todo name"
+  }
 }

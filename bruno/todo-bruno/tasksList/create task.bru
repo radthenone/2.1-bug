@@ -1,0 +1,27 @@
+meta {
+  name: create task
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/todos/:todo_id/tasks
+  body: json
+  auth: bearer
+}
+
+params:path {
+  todo_id: 2
+}
+
+auth:bearer {
+  token: {{authToken}}
+}
+
+body:json {
+  {
+    "title": "task 2",
+    "description": "fajny task2",
+    "due_date": "14:03:2025"
+  }
+}

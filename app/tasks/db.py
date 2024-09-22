@@ -25,9 +25,9 @@ class TaskModel(db.Model):
         default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False
     )
 
-    # relationships one-to-many
+    # relationship one-to-many
     todo_id: Mapped[int] = mapped_column(ForeignKey("todos.id"), nullable=False)
-    todo: Mapped["TodoModel"] = db.relationship(back_populates="tasks")
+    todo: Mapped["TodoModel"] = db.relationship("TodoModel", back_populates="tasks")
 
     def __repr__(self):
         return f"<Task {self.title}>"
@@ -37,10 +37,10 @@ class TaskModel(db.Model):
             "id": self.id,
             "title": self.title,
             "description": self.description,
-            "due_date": self.due_date,
+            "due_date": self.due_date.isoformat() if self.due_date else None,
             "completed": self.completed,
-            "created_at": self.created_at,
-            "updated_at": self.updated_at,
+            "created_at": self.created_at.isoformat(),
+            "updated_at": self.updated_at.isoformat(),
             "todo_id": self.todo_id,
         }
 

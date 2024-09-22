@@ -1,0 +1,21 @@
+meta {
+  name: create one
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/todos
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{authToken}}
+}
+
+body:json {
+  {
+    "name": "sdsfds"
+  }
+}

@@ -1,4 +1,4 @@
-from auth.guard import auth_guard
+from app.auth.guard import auth_guard
 from flask_restful import Resource, reqparse
 
 from app.auth.service import AuthService

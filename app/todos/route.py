@@ -1,9 +1,9 @@
-from auth.guard import auth_guard, get_user_id
 from flask_restful import Resource, abort, reqparse
+from todos.schema import TodoUpdateSchema
 
+from app.auth.guard import auth_guard, get_user_id
 from app.todos.schema import TodoCreateSchema
 from app.todos.service import TodoService
-from app.users.service import UserService
 
 
 class TodoController(Resource):
@@ -12,12 +12,12 @@ class TodoController(Resource):
         user_id = get_user_id()
         if todo_id:
             return TodoService.get_todo_by_id(todo_id, user_id)
-        abort(404, message="Todo not found")
+        else:
+            return TodoService.get_todos_by_user(user_id)
 
     @auth_guard()
     def post(self):
         user_id = get_user_id()
-        print(user_id)
         parser = reqparse.RequestParser()
         parser.add_argument("name", type=str, required=True)
         args = dict(parser.parse_args())
@@ -27,14 +27,17 @@ class TodoController(Resource):
         return TodoService.create_todo(todo_schema)
 
     @auth_guard()
-    def put(self, todo_id):
+    def put(self, todo_id=None):
+        user_id = get_user_id()
         parser = reqparse.RequestParser()
         parser.add_argument("name", type=str, required=True)
-        args = parser.parse_args()
+        args = dict(parser.parse_args())
 
-        updated_todo = TodoService.update_todo(todo_id, args["name"])
-        return updated_todo.to_dict()
+        todo_schema = TodoUpdateSchema(name=args["name"])
+
+        return TodoService.update_todo(todo_id, user_id, todo_schema)
 
     @auth_guard()
     def delete(self, todo_id):
-        return TodoService.delete_todo(todo_id)
+        user_id = get_user_id()
+        return TodoService.delete_todo(todo_id, user_id)

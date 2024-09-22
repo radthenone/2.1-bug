@@ -1,8 +1,9 @@
 import os
 
-from dotenv import load_dotenv
-
-load_dotenv(dotenv_path=".env")
+# from dotenv import load_dotenv
+#
+#
+# load_dotenv(dotenv_path="local.env")
 
 
 class Config:
@@ -14,7 +15,7 @@ class Config:
     POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD", "postgres")
     POSTGRES_DB = os.environ.get("POSTGRES_DB", "postgres")
     POSTGRES_HOST_AUTH_METHOD = os.environ.get("POSTGRES_HOST_AUTH_METHOD", "trust")
-    POSTGRES_PORT = os.environ.get("POSTGRES_PORT", 5433)
+    POSTGRES_PORT = os.environ.get("POSTGRES_PORT", 5432)
     FLASK_DEBUG = os.environ.get("FLASK_DEBUG", 1)
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         "SQLALCHEMY_DATABASE_URI",

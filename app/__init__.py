@@ -1,16 +1,16 @@
 import json
 import typing
 
-from auth.route import LoginController
 from flask import Flask, jsonify, make_response
 from flask_migrate import Migrate
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 
-from app.auth.route import LogoutController, RegisterController
+from app.auth.route import LoginController, LogoutController, RegisterController
 from app.config import Config
 from app.database import db
 from app.tasks.db import TaskModel
+from app.tasks.route import TaskController, TestController
 from app.todos.db import TodoModel
 from app.todos.route import TodoController
 from app.users.db import UserModel
@@ -29,7 +29,7 @@ api = Api(app)
 api.add_resource(LogoutController, "/auth/logout", endpoint="logout")
 api.add_resource(LoginController, "/auth/login", endpoint="login")
 api.add_resource(RegisterController, "/auth/register", endpoint="register")
-
 api.add_resource(TodoController, "/todos", "/todos/<int:todo_id>")
+api.add_resource(TaskController, "/todos/<int:todo_id>/tasks", "/tasks/<int:task_id>")
 
 __all__ = ["app"]

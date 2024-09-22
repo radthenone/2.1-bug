@@ -1,17 +1,17 @@
 meta {
-  name: get one
+  name: get tasks for todo
   type: http
-  seq: 2
+  seq: 1
 }
 
 get {
-  url: {{baseUrl}}/todos/:id
+  url: {{baseUrl}}/todos/:todo_id/tasks
   body: none
   auth: bearer
 }
 
 params:path {
-  id: 5
+  todo_id: 2
 }
 
 auth:bearer {

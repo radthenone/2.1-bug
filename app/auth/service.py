@@ -2,7 +2,7 @@ from typing import Optional
 
 from flask_restful import abort
 from flask_restful import output_json as response
-from users.schema import UserLoginSchema, UserRegisterSchema
+from app.users.schema import UserLoginSchema, UserRegisterSchema
 
 from app.auth.guard import auth_guard
 from app.auth.utils import generate_jwt
