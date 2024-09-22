@@ -1,0 +1,19 @@
+meta {
+  name: get one
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/todos/:id
+  body: none
+  auth: bearer
+}
+
+params:path {
+  id: 4
+}
+
+auth:bearer {
+  token: {{authToken}}
+}

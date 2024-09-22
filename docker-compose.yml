@@ -1,0 +1,47 @@
+services:
+  db:
+    container_name: postgres-todo
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_PORT=5432
+      - POSTGRES_HOST=db
+    restart: on-failure
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB} || exit 1" ]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 10s
+  web:
+    container_name: flask-todo
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_PORT=5433
+      - POSTGRES_HOST=db
+      - FLASK_DEBUG=1
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: on-failure
+    volumes:
+      - .:/app
+
+volumes:
+  postgres_data:

@@ -1,0 +1,22 @@
+meta {
+  name: login
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/auth/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "a2@gmail.com",
+    "password": "Dupa1111!"
+  }
+}
+
+vars:post-response {
+  authToken: res.headers.authorization.split('Bearer ')[1]
+}
