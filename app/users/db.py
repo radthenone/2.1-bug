@@ -22,7 +22,6 @@ class UserModel(db.Model):
         default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False
     )
 
-    # relationships many-to-one
     todos: Mapped[List["TodoModel"]] = db.relationship(
         "TodoModel", back_populates="user"
     )

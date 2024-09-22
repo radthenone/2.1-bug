@@ -1,11 +1,10 @@
-from typing import Optional, Self
+from typing import Self
 
 from flask_restful import abort
 from pydantic import (
     BaseModel,
     BeforeValidator,
     ConfigDict,
-    field_validator,
     model_validator,
 )
 from typing_extensions import Annotated

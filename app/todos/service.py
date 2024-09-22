@@ -1,15 +1,10 @@
-from dataclasses import fields
-
 from flask_restful import abort
 from flask_restful import output_json as response
 
-from app.database import db
-from app.tasks.db import TaskModel
 from app.todos.db import TodoModel
 from app.todos.repo import TodoRepository
 from app.todos.schema import TodoCreateSchema, TodoUpdateSchema
 from app.users.repo import UserRepository
-from app.users.service import UserService
 
 
 class TodoService:

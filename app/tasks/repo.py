@@ -1,8 +1,6 @@
 import logging
 from typing import List, Optional
 
-from todos.repo import TodoRepository
-
 from app.database import db
 from app.tasks.db import TaskModel
 from app.tasks.schema import TaskCreateSchema, TaskUpdateSchema

@@ -25,7 +25,6 @@ class TaskModel(db.Model):
         default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False
     )
 
-    # relationship one-to-many
     todo_id: Mapped[int] = mapped_column(ForeignKey("todos.id"), nullable=False)
     todo: Mapped["TodoModel"] = db.relationship("TodoModel", back_populates="tasks")
 

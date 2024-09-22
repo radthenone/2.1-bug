@@ -19,11 +19,9 @@ class TodoModel(db.Model):
         default=datetime.utcnow, nullable=False
     )
 
-    # relationship one-to-many
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
     user: Mapped["UserModel"] = db.relationship("UserModel", back_populates="todos")
 
-    # relationship many-to-one
     tasks: Mapped[List["TaskModel"]] = db.relationship(
         "TaskModel", back_populates="todo"
     )

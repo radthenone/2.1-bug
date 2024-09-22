@@ -1,8 +1,7 @@
 from datetime import datetime, timezone
-from typing import Annotated, Optional
+from typing import Optional
 
-from flask_restful import abort
-from pydantic import BaseModel, Field, FutureDate, field_validator
+from pydantic import BaseModel, Field, field_validator
 
 
 class TaskCreateSchema(BaseModel):
@@ -25,16 +24,6 @@ class TaskUpdateSchema(TaskCreateSchema):
     completed: Optional[bool] = Field(
         default=False, description="Task completion status"
     )
-
-    @field_validator("due_date", mode="before")
-    def validate_due_date(cls, value):
-        if isinstance(value, str):
-            value = datetime.strptime(value, "%d:%m:%Y")
-        if value and value.tzinfo is None:
-            value = value.replace(tzinfo=timezone.utc)
-        if value and value < datetime.now(timezone.utc):
-            raise ValueError("Due date cannot be in the past")
-        return value
 
 
 class TaskResponse(BaseModel):

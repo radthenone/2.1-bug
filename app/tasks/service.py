@@ -1,14 +1,12 @@
-from datetime import datetime
 from typing import Optional
 
 from flask_restful import abort
 from flask_restful import output_json as response
-from tasks.repo import TaskRepository
 
 from app.database import db
 from app.tasks.db import TaskModel
+from app.tasks.repo import TaskRepository
 from app.tasks.schema import TaskCreateSchema, TaskUpdateSchema
-from app.todos.service import TodoService
 
 
 class TaskService:

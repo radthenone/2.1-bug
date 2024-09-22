@@ -2,12 +2,11 @@ from http.client import responses
 
 from flask_restful import Resource, abort, reqparse
 from flask_restful import output_json as response
-from todos.repo import TodoRepository
-from todos.service import TodoService
 
 from app.auth.guard import auth_guard, get_user_id
 from app.tasks.schema import TaskCreateSchema, TaskUpdateSchema
 from app.tasks.service import TaskService
+from app.todos.service import TodoService
 
 
 class TestController(Resource):

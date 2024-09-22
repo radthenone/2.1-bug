@@ -1,8 +1,7 @@
-from flask_restful import Resource, abort, reqparse
-from todos.schema import TodoUpdateSchema
+from flask_restful import Resource, reqparse
 
 from app.auth.guard import auth_guard, get_user_id
-from app.todos.schema import TodoCreateSchema
+from app.todos.schema import TodoCreateSchema, TodoUpdateSchema
 from app.todos.service import TodoService
 
 
