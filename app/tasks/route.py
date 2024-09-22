@@ -29,10 +29,6 @@ class TestController(Resource):
 class TaskController(Resource):
     @auth_guard()
     def get(self, todo_id=None, task_id=None):
-        """
-        GET /todos/<int:todo_id>/tasks - Get all tasks for a specific todo
-        GET /tasks/<int:task_id> - Get a specific task by ID
-        """
         if todo_id:
             return TaskService.get_tasks_by_todo_id(todo_id)
         if task_id:
@@ -41,9 +37,6 @@ class TaskController(Resource):
 
     @auth_guard()
     def post(self, todo_id=None):
-        """
-        POST /todos/<int:todo_id>/tasks - Create a new task under the specified todo
-        """
         TodoService.provided_todo_id(todo_id, get_user_id())
 
         parser = reqparse.RequestParser()
@@ -64,9 +57,6 @@ class TaskController(Resource):
 
     @auth_guard()
     def put(self, task_id):
-        """
-        PUT /tasks/<int:task_id> - Update an existing task by ID
-        """
         parser = reqparse.RequestParser()
         parser.add_argument("title", type=str, required=True)
         parser.add_argument("description", type=str, required=False)
@@ -88,7 +78,4 @@ class TaskController(Resource):
 
     @auth_guard()
     def delete(self, task_id):
-        """
-        DELETE /tasks/<int:task_id> - Delete a specific task by ID
-        """
         return TaskService.delete_task(task_id)
